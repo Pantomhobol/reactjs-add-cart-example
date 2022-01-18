@@ -1,28 +1,40 @@
-import React from 'react';
+import React, { useContext} from 'react';
 import Product from './Product';
-import data from './data.js';
+import { ProductContext, ProductProvider } from './context/Product'
+//import data from './data.js';
 
-function Home() {
+const ProductsElementHTML = () => {
+    const { products } = useContext(ProductContext);
     return (
         <div>
-            <h1 className='text-center mt-3'> List Products</h1>
+        <h1 className='text-center mt-3'> { products.product_name } List Products</h1>
             <section className="py-4 container">
                 <div className='row justify-content-center'>
-                    { data.map((prod, index) => {
+                    { products.map((prod, index) => {
                         return (
                             <Product 
                             url={prod.url} 
-                            title={prod.title} 
+                            product_name={prod.product_name} 
                             price={prod.price} 
                             description={prod.description}
                             key={index}
-                            item={[prod]}
+                            prod={prod}
                             />
                             )
                         }
                     )}
                 </div>
             </section>
+        </div>
+    )
+}
+function Home() {
+    
+    return (
+        <div>
+            <ProductProvider>
+                <ProductsElementHTML />
+            </ProductProvider>
         </div>
     )
 }
