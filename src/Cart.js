@@ -1,40 +1,28 @@
 import React from 'react'
-import iphone from './images/iphone.jpg'
 
-function Cart() {
-    
-    // if (isEmpty) return <p>Your cart is empty</p>;
+function Cart(props) { 
     return (
         <div>
             <div className="card">
                 <div className="row">
-                    <div className="col-md-8 cart">
-                        <div className="title">
-                            <div className="row">
-                                <div className="col">
-                                    <h4><b>Shopping Cart</b></h4>
-                                    <br/>
-                                </div>
-                                <div className="col align-self-center text-right text-muted">3 items</div>
-                            </div>
-                        </div>
+                    <div className="col-md-8 cart className='mb-4'">
+                        <input type="hidden" id="key" name="key" value={props.cart.key} />
                         <div className="row border-top border-bottom">
                             <div className="row main align-items-center">
                                 <div className="col-2">
-                                    <img className="img-fluid" src={ iphone } alt={iphone} />
+                                    <img className="img-fluid" src={ props.url } alt={props.url} />
                                 </div>
                                 <div className="col">
-                                    <div className="row text-muted">Iphone</div>
-                                    <div className="row">Iphone 12 Pro</div>
+                                    <div className="row text-muted">{ props.product_name }</div>
                                 </div>
-                                <div className="col"> <button>-</button>1<button href="#">+</button> </div>
-                                <div className="col">$ 44.00 <span className="close">&#10005;</span></div>
+                                <div className="col"> <button onClick={()=>props.cart.decrementQuantity(props.id)}>-</button>{props.quantity}<button onClick={()=>props.cart.incrementQuantity(props.id)}>+</button> </div>
+                                <div className="col">${ props.price } = ${ props.price*props.quantity} <button className="btn btn-primary" onClick={()=>props.cart.removeFromCart(props.id)}>delete</button></div>
                             </div>
                         </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
     )
 }
 

@@ -1,11 +1,7 @@
-import React, { useContext} from 'react'
-import { ProductContext, ProductProvider } from './context/Product'
-//import { useCart } from 'react-use-cart'
+import React from 'react'
 
 const Product = (props) => {
-    //const { addCart } = useContext(ProductContext);
-   
-   //const { cart } = useContext(ProductContext);
+    const addToCart = props.cart.addToCart
     return (
         <div className='col-11 col-md-6 col-lg-3 mx-0 mb-4'>
             <div className="card p-0 onverflow-hidden h-100 shadow">
@@ -15,7 +11,7 @@ const Product = (props) => {
                     <h4 className="card-text">{props.price}</h4>
                     <p className="card-text">{props.description}</p>
                     <button
-                    // onClick={addCart(props.prod)}
+                     onClick={()=>addToCart(props.prod)}
                     className="btn btn-primary">Add to cart</button>
                 </div>
             </div>
